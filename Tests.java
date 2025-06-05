@@ -110,16 +110,17 @@ public class Tests {
             stringParadit += "\n\nLūdzu atbildiet ar cipariem no 1 līdz 4";
             //Parada  jautajumu un atbildi JOptionPane
             do{
+                //lietotaja ievade
                 lietotajaAtbildes[i] = Integer.parseInt(JOptionPane.showInputDialog(null, stringParadit, "Jautājums " + (i + 1), JOptionPane.INFORMATION_MESSAGE));
-            }while(lietotajaAtbildes[i] < 1 || lietotajaAtbildes[i] > 4);
-            //lietotaja ievade
+            }while(lietotajaAtbildes[i] < 1 || lietotajaAtbildes[i] > 4 || lietotajaAtbildes[i] == null);
+            
 
             if(lietotajaAtbildes[i] == pareizasAtbildes[seciba[i]]){
                 punkti++;
             } else {
                 if (nepareizi[i] == null) nepareizi[i] = "";
                     nepareizi[i] += "\n" + (i + 1) + ". jautājums:\n" + sajauktiJautajumi[i] + 
-                                            "\nJūs atbildējāt : " + lietotajaAtbildes[i] + " kas bija izvēle: " + sajauktasAtbildes[i][lietotajaAtbildes[i] - 1] + "\n" +
+                                            "\nJūs atbildējāt : " + lietotajaAtbildes[i] + "\n" + sajauktasAtbildes[i][lietotajaAtbildes[i] - 1] + "\n" +
                                     "Pareizā atbilde bija : " + pareizasAtbildes[seciba[i]] + ", kas bija: " + sajauktasAtbildes[i][pareizasAtbildes[seciba[i]] - 1] + "\n";
 
                 }
@@ -128,7 +129,7 @@ public class Tests {
         JOptionPane.showMessageDialog(null, "Jūsu rezultāts : "+punkti+" punkti no 10");
         for(int i = 0; i< nepareizi.length; i++){
             if(nepareizi != null)
-                JOptionPane.showMessageDialog(null, nepareizi[i]);
+                JOptionPane.showMessageDialog(null, nepareizi[i], "Nepareizā atbilde", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 }
