@@ -1,9 +1,12 @@
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Scanner;
 
 public class Tests {
     public static void main(String[] args) {
         
+        Scanner sc = new Scanner(System.in);
+
         String [] jautajumi = {
         // 1. jautājums
         "Kas ir priekšnosacījuma cikls Java valodā?\n",
@@ -20,13 +23,15 @@ public class Tests {
         // 7. jautājums
         "Kāds būs rezultāts?\n\nint i = 10;\nwhile (i < 5) {\nSystem.out.println(i);\ni++;\n",
         // 8. jautājums
-        "Kā pareizi uzrakstīt while ciklu, kas izvada skaitļus no 1 līdz 3?\n",
+        "Kā pareizi uzrakstīt while ciklu, kas izvada skaitļus no 1 līdz 3( pieņemot, ka i = 1)?\n",
         // 9. jautājums
         "Kura no šīm izvēlēm var izraisīt bezgalīgu ciklu?",
         // 10. jautājums
         "Kas notiks ja while cikla nosacījums vienmēr būs patiess?"
         };
-                                
+        
+        int[] pareizasAtbildes = {3, 2, 2, 1, 3, 2, 3, 3, 3, 3};
+
         String atbilzuIespejas[][] = {
         // 1. jautājums
         {"A) for", "B) do-while", "C) while", "D) switch"},
@@ -65,7 +70,7 @@ public class Tests {
         }};
 
         // Pareizās atbildes
-        int[] pareizasAtbildes = {2, 1, 2, 1, 2, 1, 3, 2, 2, 3};
+       
 
         int[] lietotajaAtbildes = new int[10];
 
@@ -76,19 +81,33 @@ public class Tests {
         //Sajauc jautajumus
         Collections.shuffle(Arrays.asList(seciba));
 
+
+        //Sajauc atbilžu iespējas
         String[] sajauktiJautajumi = new String[jautajumi.length];
-        String[][] sajauktasAtbildes = new String[atbilzuIespejas.length][];
+        String[][] sajauktasAtbildes = new String[jautajumi.length][];
         for(int i = 0; i<seciba.length; i++){
             sajauktiJautajumi[i] = jautajumi[seciba[i]];
             sajauktasAtbildes[i] = atbilzuIespejas[seciba[i]];
         }
-
+        int punkti = 0;
         for(int i = 0; i < 10; i++){
             System.out.println(sajauktiJautajumi[i]);
             for(int j = 0; j<4; j++){
                 System.out.println(sajauktasAtbildes[i][j]);
             }
+                do{
+                    System.out.print("Atbilde (1-4): ");
+                    lietotajaAtbildes[i] = sc.nextInt();
+                }while(lietotajaAtbildes[i] < 1 || lietotajaAtbildes[i] > 4);
+
+                if(lietotajaAtbildes[i] == pareizasAtbildes[seciba[i]]){
+                    punkti++;
+                    System.out.println("Pareizi! +1 punkts");
+                } else {
+                    System.out.println("Garaam");
+                }
             System.out.println("-----------------------------------");
         }
+        System.out.println("Jūsu rezultāts : "+punkti+" punkti no 10");
     }
 }
