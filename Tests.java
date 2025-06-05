@@ -2,6 +2,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 public class Tests {
     public static void main(String[] args) {
         
@@ -34,39 +36,39 @@ public class Tests {
 
         String atbilzuIespejas[][] = {
         // 1. jautājums
-        {"A) for", "B) do-while", "C) while", "D) switch"},
+        {"1) for", "2) do-while", "3) while", "4) switch"},
         // 2. jautājums
-        {"A)123","B)012","C) 0123","D)false"},
+        {"1)123","2)012","3) 0123","4)false"},
         // 3. jautājums
-        {"A) Cikls vienmēr izpildās vismaz vienu reizi", "B) Cikls izpildās tikai tad, ja nosacījums ir patiess", "C) Cikls beidzas automātiski pēc trim reizēm", "D) Nosacījums tiek pārbaudīts cikla beigās"},
+        {"1) Cikls vienmēr izpildās vismaz vienu reizi", "2) Cikls izpildās tikai tad, ja nosacījums ir patiess", "3) Cikls beidzas automātiski pēc trim reizēm", "4) Nosacījums tiek pārbaudīts cikla beigās"},
         // 4. jautājums
-        {"A) Izvada skaitļus no 5 līdz 1", "B) Izvada skaitļus no 1 līdz 5", "C) Cikls nekad neizpildās", "D) Izvada skaitļus no 0 līdz 5"},
+        {"1) Izvada skaitļus no 5 līdz 1", "2) Izvada skaitļus no 1 līdz 5", "3) Cikls nekad neizpildās", "4) Izvada skaitļus no 0 līdz 5"},
         // 5. jautājums
-        {"A) Pēc cikla izpildes", "B) Koda sākumā", "C) Pirms katras iterācijas", "D) Tikai vienereiz "},
+        {"1) Pēc cikla izpildes", "2) Koda sākumā", "3) Pirms katras iterācijas", "4) Tikai vienereiz "},
         // 6. jautājums
-        {"A) Izdrukās Java 5 reizes", "B) Izdrukās Java bezgalīgas reizes", "C) Izvadīs Java 1 reizi", "D) Cikls izpildīsies vienu reizi"},
+        {"1) Izdrukās Java 5 reizes", "2) Izdrukās Java bezgalīgas reizes", "3) Izvadīs Java 1 reizi", "4) Cikls izpildīsies vienu reizi"},
         // 7. jautājums
-        {"A) 10", "B) 10 līdz 5", "C) Nekas", "D) Projekts neies"},
+        {"1) 10", "2) 10 līdz 5", "3) Nekas", "4) Projekts neies"},
         // 8. jautājums
         {
-            "A) while (i <= 3) {\ni++;\nSystem.out.println(i);\n}",
-            "B) while (i < 3) {\nSystem.out.println(i);\ni++;\n}",
-            "C) while (i < 4) {\nSystem.out.println(i);\ni++;\n}",
-            "D) while (i > 0) {\nSystem.out.println(i);\ni--;\n}"
+            "1) while (i <= 3) {\ni++;\nSystem.out.println(i);\n}",
+            "2) while (i < 3) {\nSystem.out.println(i);\ni++;\n}",
+            "3) while (i < 4) {\nSystem.out.println(i);\ni++;\n}",
+            "4) while (i > 0) {\nSystem.out.println(i);\ni--;\n}"
           },
         // 9. jautājums
         {
-            "\nA) Palielinot skaitītāju cikla beigās",
-            "B) Mainot nosacījumu cikla laikā",
-            "C) Nenodrošinot nosacījuma izmaiņu ciklā",
-            "D) Lietojot for ciklu"
+            "\n1) Palielinot skaitītāju cikla beigās",
+            "2) Mainot nosacījumu cikla laikā",
+            "3) Nenodrošinot nosacījuma izmaiņu ciklā",
+            "4) Lietojot for ciklu"
         },
         // 10. jautājums
         {
             "\nA) Cikls tiks izpildīts tikai vienreiz",
-            "B) Tiks izvadīta kļūda kompilēšanas laikā",
-            "C) Programma izpildīs ciklu bezgalīgi",
-            "D) Cikls netiks izpildīts vispār"
+            "2) Tiks izvadīta kļūda kompilēšanas laikā",
+            "3) Programma izpildīs ciklu bezgalīgi",
+            "4) Cikls netiks izpildīts vispār"
         }};
 
         // Pareizās atbildes
@@ -89,25 +91,44 @@ public class Tests {
             sajauktiJautajumi[i] = jautajumi[seciba[i]];
             sajauktasAtbildes[i] = atbilzuIespejas[seciba[i]];
         }
-        int punkti = 0;
-        for(int i = 0; i < 10; i++){
-            System.out.println(sajauktiJautajumi[i]);
-            for(int j = 0; j<4; j++){
-                System.out.println(sajauktasAtbildes[i][j]);
-            }
-                do{
-                    System.out.print("Atbilde (1-4): ");
-                    lietotajaAtbildes[i] = sc.nextInt();
-                }while(lietotajaAtbildes[i] < 1 || lietotajaAtbildes[i] > 4);
 
-                if(lietotajaAtbildes[i] == pareizasAtbildes[seciba[i]]){
-                    punkti++;
-                    System.out.println("Pareizi! +1 punkts");
-                } else {
-                    System.out.println("Garaam");
+        int punkti = 0;
+        //Izveido String mainīgo, lai salabātu nepareizās atbildes
+        String []nepareizi = new String[10];
+        
+
+        for(int i = 0; i < 10; i++){
+            //strings ko parada JOptionPane
+            String stringParadit = "";
+            //pievieno jautajumu
+            stringParadit += sajauktiJautajumi[i]+ "\n";
+
+            for(int j = 0; j<4; j++){
+                //basically saliek visas iespejamas atbilde uz jautajumu, lai paraditu JOptionPane
+                stringParadit += sajauktasAtbildes[i][j] + "\n"; 
+            }
+            stringParadit += "\n\nLūdzu atbildiet ar cipariem no 1 līdz 4";
+            //Parada  jautajumu un atbildi JOptionPane
+            do{
+                lietotajaAtbildes[i] = Integer.parseInt(JOptionPane.showInputDialog(null, stringParadit, "Jautājums " + (i + 1), JOptionPane.INFORMATION_MESSAGE));
+            }while(lietotajaAtbildes[i] < 1 || lietotajaAtbildes[i] > 4);
+            //lietotaja ievade
+
+            if(lietotajaAtbildes[i] == pareizasAtbildes[seciba[i]]){
+                punkti++;
+            } else {
+                if (nepareizi[i] == null) nepareizi[i] = "";
+                    nepareizi[i] += "\n" + (i + 1) + ". jautājums:\n" + sajauktiJautajumi[i] + 
+                                            "\nJūs atbildējāt : " + lietotajaAtbildes[i] + " kas bija izvēle: " + sajauktasAtbildes[i][lietotajaAtbildes[i] - 1] + "\n" +
+                                    "Pareizā atbilde bija : " + pareizasAtbildes[seciba[i]] + ", kas bija: " + sajauktasAtbildes[i][pareizasAtbildes[seciba[i]] - 1] + "\n";
+
                 }
             System.out.println("-----------------------------------");
         }
-        System.out.println("Jūsu rezultāts : "+punkti+" punkti no 10");
+        JOptionPane.showMessageDialog(null, "Jūsu rezultāts : "+punkti+" punkti no 10");
+        for(int i = 0; i< nepareizi.length; i++){
+            if(nepareizi != null)
+                JOptionPane.showMessageDialog(null, nepareizi[i]);
+        }
     }
 }
