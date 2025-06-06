@@ -70,7 +70,7 @@ public class Tests {
         }};
 
         // Pareizās atbildes
-       
+       JOptionPane.showMessageDialog(null, "Sveiki, šis ir 10 jautājumu tests, uz jautājumiem jāatbild ar cipariem no 1 līdz 4,lai veicas ;D", null, JOptionPane.INFORMATION_MESSAGE);
 
         int[] lietotajaAtbildes = new int[10];
 
