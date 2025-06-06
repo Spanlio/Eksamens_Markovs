@@ -1,14 +1,12 @@
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Scanner;
+
 
 import javax.swing.JOptionPane;
 
 public class Tests {
     public static void main(String[] args) {
         
-        Scanner sc = new Scanner(System.in);
-
         String [] jautajumi = {
         // 1. jautājums
         "Kas ir priekšnosacījuma cikls Java valodā?\n",
@@ -94,7 +92,7 @@ public class Tests {
 
         int punkti = 0;
         //Izveido String mainīgo, lai salabātu nepareizās atbildes
-        String []nepareizi = new String[10];
+        String []nepareizi = new String[jautajumi.length];
         
 
         for(int i = 0; i < 10; i++){
@@ -109,27 +107,46 @@ public class Tests {
             }
             stringParadit += "\n\nLūdzu atbildiet ar cipariem no 1 līdz 4";
             //Parada  jautajumu un atbildi JOptionPane
-            do{
-                //lietotaja ievade
-                lietotajaAtbildes[i] = Integer.parseInt(JOptionPane.showInputDialog(null, stringParadit, "Jautājums " + (i + 1), JOptionPane.INFORMATION_MESSAGE));
-            }while(lietotajaAtbildes[i] < 1 || lietotajaAtbildes[i] > 4 || lietotajaAtbildes[i] == null);
-            
+            boolean der = false;
+            int prostMainigais = 0;
+            do {
+                try {
+                    String ievade = JOptionPane.showInputDialog(null, stringParadit, "Jautājums " + (i + 1), JOptionPane.INFORMATION_MESSAGE);
+                    //ja ievade nav tukša un nav null
+                    if (ievade != null && !ievade.trim().isEmpty()) {
+                        prostMainigais = Integer.parseInt(ievade.trim());
+                        //parbauda vai skaitlis ir diapazona no 1 lidz 4
+                        if (prostMainigais >= 1 && prostMainigais <= 4) {
+                            lietotajaAtbildes[i] = prostMainigais;
+                            der = true;
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Lūdzu ievadiet skaitli no 1 līdz 4", "Kļūda", JOptionPane.ERROR_MESSAGE);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Ievade nevar būt tukša", "Kļūda", JOptionPane.ERROR_MESSAGE);
+                    }
+                } catch (NumberFormatException e) {
+                    JOptionPane.showMessageDialog(null, "Lūdzu ievadiet skaitli no 1 līdz 4", "Kļūda", JOptionPane.ERROR_MESSAGE);
+                }
+            } while (!der);
 
+            //Parbauda vai lietotaja atbilde ir pareiza
             if(lietotajaAtbildes[i] == pareizasAtbildes[seciba[i]]){
                 punkti++;
             } else {
                 if (nepareizi[i] == null) nepareizi[i] = "";
                     nepareizi[i] += "\n" + (i + 1) + ". jautājums:\n" + sajauktiJautajumi[i] + 
                                             "\nJūs atbildējāt : " + lietotajaAtbildes[i] + "\n" + sajauktasAtbildes[i][lietotajaAtbildes[i] - 1] + "\n" +
-                                    "Pareizā atbilde bija : " + pareizasAtbildes[seciba[i]] + ", kas bija: " + sajauktasAtbildes[i][pareizasAtbildes[seciba[i]] - 1] + "\n";
+                                    "Pareizā atbilde bija : " + sajauktasAtbildes[i][pareizasAtbildes[seciba[i]] - 1] + "\n";
 
                 }
             System.out.println("-----------------------------------");
         }
         JOptionPane.showMessageDialog(null, "Jūsu rezultāts : "+punkti+" punkti no 10");
         for(int i = 0; i< nepareizi.length; i++){
-            if(nepareizi != null)
+            if (nepareizi[i] != null && !nepareizi[i].trim().isEmpty())
                 JOptionPane.showMessageDialog(null, nepareizi[i], "Nepareizā atbilde", JOptionPane.INFORMATION_MESSAGE);
         }
+        JOptionPane.showMessageDialog(null, "Paldies par spēlēšanu!", "Spēle beigusies", JOptionPane.INFORMATION_MESSAGE);
     }
 }
