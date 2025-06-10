@@ -3,6 +3,8 @@ import java.util.Collections;
 
 
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 
 public class Tests {
     public static void main(String[] args) {
@@ -72,6 +74,7 @@ public class Tests {
         // Pareizās atbildes
        JOptionPane.showMessageDialog(null, "Sveiki, šis ir 10 jautājumu tests, uz jautājumiem jāatbild ar cipariem no 1 līdz 4,lai veicas ;D", null, JOptionPane.INFORMATION_MESSAGE);
 
+        String textsString = "";
         int[] lietotajaAtbildes = new int[10];
 
         Integer seciba[] = new Integer[jautajumi.length];
@@ -131,22 +134,32 @@ public class Tests {
             } while (!der);
 
             //Parbauda vai lietotaja atbilde ir pareiza
+
+
             if(lietotajaAtbildes[i] == pareizasAtbildes[seciba[i]]){
                 punkti++;
             } else {
                 if (nepareizi[i] == null) nepareizi[i] = "";
-                    nepareizi[i] += "\n" + (i + 1) + ". jautājums:\n" + sajauktiJautajumi[i] + 
-                                            "\nJūs atbildējāt : " + lietotajaAtbildes[i] + "\n" + sajauktasAtbildes[i][lietotajaAtbildes[i] - 1] + "\n" +
+                    textsString += "\n" + (i + 1) + ". jautājums:\n" + sajauktiJautajumi[i] + 
+                                            "\nJūs atbildējāt : "  + sajauktasAtbildes[i][lietotajaAtbildes[i] - 1] + "\n" +
                                     "Pareizā atbilde bija : " + sajauktasAtbildes[i][pareizasAtbildes[seciba[i]] - 1] + "\n";
 
                 }
-            System.out.println("-----------------------------------");
         }
+        //Parāda rezultātu
         JOptionPane.showMessageDialog(null, "Jūsu rezultāts : "+punkti+" punkti no 10");
-        for(int i = 0; i< nepareizi.length; i++){
-            if (nepareizi[i] != null && !nepareizi[i].trim().isEmpty())
-                JOptionPane.showMessageDialog(null, nepareizi[i], "Nepareizā atbilde", JOptionPane.INFORMATION_MESSAGE);
-        }
-        JOptionPane.showMessageDialog(null, "Paldies par spēlēšanu!", "Spēle beigusies", JOptionPane.INFORMATION_MESSAGE);
+
+        JTextArea tekstaArea = new JTextArea(textsString);
+        tekstaArea.setLineWrap(true);
+        tekstaArea.setWrapStyleWord(true);
+        tekstaArea.setEditable(false);
+
+        JScrollPane scrollPane = new JScrollPane(tekstaArea);
+        scrollPane.setPreferredSize(new java.awt.Dimension(500, 300));
+
+
+        JOptionPane.showMessageDialog(null, scrollPane, "Info", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Paldies par dalību testā!", "Paldies", JOptionPane.INFORMATION_MESSAGE);
+
     }
 }
